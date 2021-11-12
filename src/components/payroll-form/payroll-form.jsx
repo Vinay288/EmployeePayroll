@@ -3,9 +3,12 @@ import profile1 from '../../assets/profile-images/Ellipse -3.png'
 import profile2 from '../../assets/profile-images/Ellipse -2.png'
 import profile3 from '../../assets/profile-images/Ellipse -1.png'
 import profile4 from '../../assets/profile-images/Ellipse -8.png'
+import { v1 as uuidv1 } from 'uuid';
 import './payroll-form.scss';
 import logo from '../../assets/images/logo.png'
+import EmployeeService from '../../services/employee-service';
 
+var employee = new EmployeeService();
 const PayrollForm = (props) => {
 
     let initialValue = {
@@ -97,7 +100,7 @@ const PayrollForm = (props) => {
         }
 
         if (formValue.departmentValues.length < 1) {
-            error.departMentValues = 'deparment is required field'
+            error.deparment = 'deparment is required field'
             isError = true;
         }
 
@@ -107,6 +110,31 @@ const PayrollForm = (props) => {
 
     const save = async (event) => {
         event.preventDefault();
+        console.log("save");
+
+        if(await validData())
+        {
+            console.log('error',formValue);
+            return;
+        }
+
+        let object ={
+
+            name:formValue.name,
+            departMentValue:formValue.departmentValues,
+            gender:formValue.gender,
+            salary:formValue.salary,
+            startDate:`${formValue.day} ${formValue.month} ${formValue.year}`,
+            notes:formValue.notes,
+            id:uuidv1(),
+            profileUrl:formValue.profileUrl,
+        }
+
+        employee.addEmployee(object).then(data=>{
+            console.log("data added");
+        }).catch(err =>{
+            console.log("err while add",err);
+        })
     }
 
     const reset = () => {
@@ -132,30 +160,30 @@ const PayrollForm = (props) => {
                 <form className="form" action="#" onSubmit={save}>
                     <div className="form-head">Employee payroll form</div>
                     <div className="row-content">
-                        <label className="label text" htmlFor="name">Name</label>
-                        <input className="input" type="text" id="name" value={formValue.name} onChange={changeValue} placeholder="Your name.." />
+                    <label className="label text" htmlFor="name">Name</label>
+              <input className="input" type="text" id="name" name="name" value={formValue.name} onChange={changeValue} placeholder="Your name.." required />
                     </div>
                     <div className="error">{formValue.error.name}</div>
                     <div className="row-content">
                         <label className="label text" htmlFor="profileUrl">Profile image</label>
                         <div className="profile-radio-button">
                             <label>
-                                <input type='radio' id="profile1" checked={formValue.profileUrl == '../../assets/profile-images/Ellipse -3.png'} name="profileUrl"
+                                <input type='radio' id="profile1" checked={formValue.profileUrl === '../../assets/profile-images/Ellipse -3.png'} name="profileUrl"
                                     value="../../assets/profile-images/Ellipse -3.png" onChange={changeValue} />
                                 <img className="profile" id="image1" src={profile1} />
                             </label>
                             <label>
-                                <input type='radio' id="profile2" checked={formValue.profileUrl == '../../assets/profile-images/Ellipse -2.png'} name="profileUrl"
+                                <input type='radio' id="profile2" checked={formValue.profileUrl ==='../../assets/profile-images/Ellipse -2.png'} name="profileUrl"
                                     value="../../assets/profile-images/Ellipse -2.png" onChange={changeValue} />
                                 <img className="profile" id="image2" src={profile2} />
                             </label>
                             <label>
-                                <input type='radio' id="profile3" checked={formValue.profileUrl == '../../assets/profile-images/Ellipse -1.png'} name="profileUrl"
+                                <input type='radio' id="profile3" checked={formValue.profileUrl === '../../assets/profile-images/Ellipse -1.png'} name="profileUrl"
                                     value="../../assets/profile-images/Ellipse -1.png" onChange={changeValue} />
                                 <img className="profile" id="image3" src={profile3} />
                             </label>
                             <label>
-                                <input type='radio' id="profile4" checked={formValue.profileUrl == '../../assets/profile-images/Ellipse -8.png'} name="profileUrl"
+                                <input type='radio' id="profile4" checked={formValue.profileUrl === '../../assets/profile-images/Ellipse -8.png'} name="profileUrl"
                                     value="../../assets/profile-images/Ellipse -8.png" onChange={changeValue} />
                                 <img className="profile" id="image4" src={profile4} />
                             </label>
@@ -242,7 +270,7 @@ const PayrollForm = (props) => {
                             <option value="Nov">November</option>
                             <option value="Dec">December</option></select>
                         <select onChange={changeValue} id="year" name="year">
-                            <option value="2020">2021</option>
+                            <option value="2021">2021</option>
                             <option value="2020">2020</option>
                             <option value="2019">2019</option>
                             <option value="2018">2018</option>
@@ -263,7 +291,7 @@ const PayrollForm = (props) => {
                     <div className="buttonParent">
                         <a routerLink="" className="resetButton button cancelButton">Cancel</a>
                         <div className="submit-reset">
-                            <button type="submit" className="button submitButton" id="submitButton">{formValue.isUpdate ? 'Update' : 'Submit'}</button>
+                            <button type="submit" className="button submitButton" id="submitButton" onClick={save}>{formValue.isUpdate ? 'Update' : 'Submit'}</button>
                             <button type="button" onClick={reset} className="resetButton button">Reset</button>
                         </div>
                     </div>
