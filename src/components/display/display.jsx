@@ -1,13 +1,17 @@
 import deleteIcon from '../../assets/icons/delete-black-18dp.svg'
 import editIcon from '../../assets/icons/create-black-18dp.svg'
 import '../home/home.scss'
+import EmployeeService from '../../services/employee-service';
+
+var employee = new EmployeeService();
 
 const Display = (props) => {   
     const remove= (id) =>{
-
+        console.log("fdfdfd")
+        employee.deleteEmployee(id)
     } 
     const update=(id)=>{
-        
+
     }
     return(
         <table id="display" className="display">
