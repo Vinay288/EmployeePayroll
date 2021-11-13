@@ -15,10 +15,10 @@ const PayrollForm = (props) => {
 
         name: '',
         profileArray: [
-            { url: '../../../assets/profile-images/Ellipse -3' },
-            { url: '../../../assets/profile-images/Ellipse -2' },
-            { url: '../../../assets/profile-images/Ellipse -1' },
-            { url: '../../../assets/profile-images/Ellipse -8' },
+            { url: 'profile-images/Ellipse -1.png' },
+            { url: 'profile-images/Ellipse -2.png' },
+            { url: 'profile-images/Ellipse -3.png' },
+            { url: 'profile-images/Ellipse -8.png' },
 
         ],
         allDepartment: [
@@ -168,22 +168,22 @@ const PayrollForm = (props) => {
                         <label className="label text" htmlFor="profileUrl">Profile image</label>
                         <div className="profile-radio-button">
                             <label>
-                                <input type='radio' id="profile1" checked={formValue.profileUrl === '../../assets/profile-images/Ellipse -3.png'} name="profileUrl"
+                                <input type='radio' id="profile1" checked={formValue.profileUrl === 'profile-images/Ellipse -3.png'} name="profileUrl"
                                     value="../../assets/profile-images/Ellipse -3.png" onChange={changeValue} />
                                 <img className="profile" id="image1" src={profile1} />
                             </label>
                             <label>
-                                <input type='radio' id="profile2" checked={formValue.profileUrl ==='../../assets/profile-images/Ellipse -2.png'} name="profileUrl"
+                                <input type='radio' id="profile2" checked={formValue.profileUrl ==='profile-images/Ellipse -2.png'} name="profileUrl"
                                     value="../../assets/profile-images/Ellipse -2.png" onChange={changeValue} />
                                 <img className="profile" id="image2" src={profile2} />
                             </label>
                             <label>
-                                <input type='radio' id="profile3" checked={formValue.profileUrl === '../../assets/profile-images/Ellipse -1.png'} name="profileUrl"
+                                <input type='radio' id="profile3" checked={formValue.profileUrl === 'profile-images/Ellipse -1.png'} name="profileUrl"
                                     value="../../assets/profile-images/Ellipse -1.png" onChange={changeValue} />
                                 <img className="profile" id="image3" src={profile3} />
                             </label>
                             <label>
-                                <input type='radio' id="profile4" checked={formValue.profileUrl === '../../assets/profile-images/Ellipse -8.png'} name="profileUrl"
+                                <input type='radio' id="profile4" checked={formValue.profileUrl === 'profile-images/Ellipse -8.png'} name="profileUrl"
                                     value="../../assets/profile-images/Ellipse -8.png" onChange={changeValue} />
                                 <img className="profile" id="image4" src={profile4} />
                             </label>
