@@ -16,6 +16,11 @@ export default class EmployeeService{
         console.log("get data")
         return axios.get(`${this.baseUrl}employee/`);
     }
+    deleteEmployee(id)
+    {
+        console.log("deleted")
+        axios.delete(`${this.baseUrl}employee/`+id);
+    }
 }
 
 
