@@ -40,7 +40,7 @@ const Home = (props) => {
                                 {employeeArray.length}
                             </div>
                         </div>
-                        <Link to="payroll-form" className="add-button">
+                        <Link to="/" className="add-button">
                             <img src={addButton} alt="" />Add User</Link>
                     </div>
                     <div className="table-main">
