@@ -9,6 +9,7 @@ function App() {
       <Routes>
       <Route path="/" element={<PayrollForm />} ></Route> 
       <Route path="/home" element={<Home />}></Route>
+      <Route path="/form/:id" element={<PayrollForm />} ></Route> 
       </Routes>
   </BrowserRouter>  
   );
