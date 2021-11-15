@@ -12,8 +12,8 @@ const Home = (props) => {
     const [employeeArray, setEmployeeArray] = useState([])
     const getAllEmployees = () => {
         employee.getAllEmployees().then(emp => {
-            console.log("data after get",Array.from(emp.data));
-            setEmployeeArray(emp.data )
+            console.log("data after get",emp.data.data);
+            setEmployeeArray(emp.data.data )
         })
             .catch(err => {
                 console.log("err after", err);
