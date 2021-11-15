@@ -21,6 +21,15 @@ export default class EmployeeService{
         console.log("deleted")
         axios.delete(`${this.baseUrl}employee/`+id);
     }
+    updateEmployee(data,id)
+    {
+        console.log("update")
+        axios.put(`${this.baseUrl}employee/`+id,data);
+    }
+    getEmployee(id){
+        console.log("get data for one")
+        return axios.get(`${this.baseUrl}employee/`+id);
+    }
 }
 
 
