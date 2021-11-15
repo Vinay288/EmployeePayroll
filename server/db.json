@@ -1,12 +1,18 @@
 {
-    "employee": [
-        {
-            "name": "vinay",
-            "salary": 3000
-        },
-        {
-            "name": "sfsf",
-            "salary": 545
-        }
-    ]
+  "employee": [
+    {
+      "name": "VinaySHj",
+      "departMentValue": [
+        "Sales",
+        "HR",
+        "Finance"
+      ],
+      "gender": "male",
+      "salary": "9754",
+      "startDate": "18 Nov 2020",
+      "notes": "sdsdshjhjhj",
+      "id": "0f9049f0-43c7-11ec-b094-2bb73d0b669a",
+      "profileUrl": "profile-images/Ellipse -3.png"
+    }
+  ]
 }
