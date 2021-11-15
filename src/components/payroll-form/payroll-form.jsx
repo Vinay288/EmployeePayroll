@@ -30,7 +30,7 @@ const PayrollForm = (props) => {
         departmentValues: [],
         gender: '',
         salary: '',
-        day: '1',
+        day: '01',
         month: 'Jan',
         year: '2020',
         startDate: '',
@@ -82,9 +82,9 @@ const PayrollForm = (props) => {
             startDate: ''
 
         }
-
-        if (formValue.name.length < 1) {
-            error.name = 'name is required field'
+        const regName = /^[A-Z]{1}[a-zA-Z\\s]{2,}$/ ;
+        if ( formValue.gender.length < 1 || !regName.test(formValue.name)) {
+            error.name = 'name is wrong'
             isError = true;
         }
 
@@ -93,8 +93,8 @@ const PayrollForm = (props) => {
             isError = true;
         }
 
-        if (formValue.salary.length < 1) {
-            error.salary = 'salary is required field'
+        if (formValue.salary.length < 1 ) {
+            error.salary = 'salary should be more then 500'
             isError = true;
         }
 
@@ -116,18 +116,20 @@ const PayrollForm = (props) => {
             formValue.isUpdate = true
             employee.getEmployee(id).then(emp => {
                 console.log(emp.data)
-                var date = emp.data.startDate.split(" ");
+                var date = emp.data.data.startDate.split("-");
+                console.log(date)
+                var month=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
                 setForm({
                     ...formValue,
-                    name: emp.data.name,
-                    profileUrl: emp.data.profileUrl,
-                    departmentValues: emp.data.departMentValue,
-                    gender: emp.data.gender,
-                    salary: emp.data.salary,
-                    day: date[0],
-                    month: date[1],
-                    year: date[2],
-                    notes: emp.data.notes
+                    name: emp.data.data.name,
+                    profileUrl: emp.data.data.profilePic,
+                    departmentValues: emp.data.data.departments,
+                    gender: emp.data.data.gender,
+                    salary: emp.data.data.salary,
+                    day: date[2],
+                    month: month[Number(date[1])-1],
+                    year: date[0],
+                    notes: emp.data.data.note
                 });
 
             }).catch(error => {
@@ -143,17 +145,17 @@ const PayrollForm = (props) => {
             console.log('error', formValue);
             return;
         }
+        console.log(formValue.day)
         if (formValue.isUpdate) {
             let object = {
 
                 name: formValue.name,
-                departMentValue: formValue.departmentValues,
+                departments: formValue.departmentValues,
                 gender: formValue.gender,
                 salary: formValue.salary,
                 startDate: `${formValue.day} ${formValue.month} ${formValue.year}`,
-                notes: formValue.notes,
-                id: id,
-                profileUrl: formValue.profileUrl,
+                note: formValue.notes,
+                profilePic: formValue.profileUrl,
             }
             employee.updateEmployee(object, id);
             formValue.isUpdate = false
@@ -162,15 +164,14 @@ const PayrollForm = (props) => {
             let object = {
 
                 name: formValue.name,
-                departMentValue: formValue.departmentValues,
+                departments: formValue.departmentValues,
                 gender: formValue.gender,
                 salary: formValue.salary,
                 startDate: `${formValue.day} ${formValue.month} ${formValue.year}`,
-                notes: formValue.notes,
-                id: uuidv1(),
-                profileUrl: formValue.profileUrl,
+                note: formValue.notes,
+                profilePic: formValue.profileUrl,
             }
-
+            console.log(object)
             employee.addEmployee(object).then(data => {
                 console.log("data added");
             }).catch(err => {
@@ -309,7 +310,7 @@ const PayrollForm = (props) => {
                             <option value="Apr">April</option>
                             <option value="May">May</option>
                             <option value="Jun">June</option>
-                            <option value="July">July</option>
+                            <option value="Jul">July</option>
                             <option value="Aug">August</option>
                             <option value="Sep">September</option>
                             <option value="Oct">October</option>
